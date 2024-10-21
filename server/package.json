@@ -1,0 +1,25 @@
+{
+  "name": "nasa-project-api",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "dev": "supervisor server.js",
+    "start": "node server.js",
+    "test": "jest",
+    "cluster": "pm2 start server.js -i max"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0",
+    "supervisor": "^0.12.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "csv-parse": "^5.5.6",
+    "express": "^4.21.1",
+    "mongoose": "^8.7.1",
+    "morgan": "^1.10.0",
+    "pm2": "^5.4.2"
+  }
+}
