@@ -28,14 +28,14 @@ const launchSchema = new mongoose.Schema({
     type: Number,
     required: true,
     unique: true,
-    upcoming: {
-      type: Boolean,
-      default: true,
-    },
-    success: {
-      type: Boolean,
-      default: true,
-    },
+  },
+  upcoming: {
+    type: Boolean,
+    default: true,
+  },
+  success: {
+    type: Boolean,
+    default: true,
   },
 });
 
