@@ -35,15 +35,23 @@ const saveLaunch = async (launch) => {
   );
 };
 
+(async () => {
+  try {
+    await saveLaunch(launch);
+  } catch (error) {
+    console.error("Error happened during a launch saving", error);
+  }
+})();
+
 const getLatestFlightNumber = async () => {
-  const latestLaunch = await launchesDatabase.findOne().sort("-flightNumber");
+  const { flightNumber } = await launchesDatabase
+    .findOne()
+    .sort("-flightNumber");
 
-  if (!latestLaunch) return DEFAULT_LAUNCH_NUMBER;
+  if (!flightNumber) return DEFAULT_LAUNCH_NUMBER;
 
-  return latestLaunch.flightNumber;
+  return flightNumber;
 };
-
-await saveLaunch(launch);
 
 const scheduleNewLaunch = async (launch) => {
   const latestFlightNumber = await getLatestFlightNumber();

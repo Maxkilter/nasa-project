@@ -31,6 +31,7 @@ const httpAddNewLaunch = async (req, res) => {
   }
 
   launch.launchDate = new Date(launchDate);
+
   if (isNaN(launch.launchDate)) {
     return res.status(400).json({ error: "Launch date is not a valid date" });
   }
