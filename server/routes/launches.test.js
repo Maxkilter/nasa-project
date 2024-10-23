@@ -1,6 +1,6 @@
 const request = require("supertest");
 const app = require("../app");
-const { LAUNCHES_PATH } = require("../constants");
+const { LAUNCHES_PATH, API_VERSION } = require("../constants");
 const { connectMongo, disconnectMongo } = require("../services/mongo");
 
 describe("Launches API", () => {
@@ -10,7 +10,7 @@ describe("Launches API", () => {
   describe("GET /launches", () => {
     it("should respond with 200 success", async () => {
       return await request(app)
-        .get(LAUNCHES_PATH)
+        .get(API_VERSION + LAUNCHES_PATH)
         .expect("Content-Type", /json/)
         .expect(200);
     });
@@ -31,7 +31,7 @@ describe("Launches API", () => {
 
     it("should respond with 201 created", async () => {
       const response = await request(app)
-        .post(LAUNCHES_PATH)
+        .post(API_VERSION + LAUNCHES_PATH)
         .send(completeLaunchData)
         .expect("Content-Type", /json/)
         .expect(201);
@@ -45,7 +45,7 @@ describe("Launches API", () => {
 
     it("should catch missing launch date property", async () => {
       const response = await request(app)
-        .post(LAUNCHES_PATH)
+        .post(API_VERSION + LAUNCHES_PATH)
         .send(launchDataWithoutDate)
         .expect("Content-Type", /json/)
         .expect(400);
@@ -57,7 +57,7 @@ describe("Launches API", () => {
 
     it("should catch invalid launch date property", async () => {
       const response = await request(app)
-        .post(LAUNCHES_PATH)
+        .post(API_VERSION + LAUNCHES_PATH)
         .send({ ...launchDataWithoutDate, launchDate: "tada-rada" })
         .expect("Content-Type", /json/)
         .expect(400);
