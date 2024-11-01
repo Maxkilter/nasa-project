@@ -1,10 +1,11 @@
 name: Prettier Code Style Check
+
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-  lint:
+  Lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -13,5 +14,10 @@ jobs:
         with:
           node-version: '22.x'
       - run: yarn install
-      - name: Run Prettier for Code Style Check
-        run: yarn prettier --check .
+      - name: Run Prettier for Code Style Check (Server Source Only)
+        run: |
+          yarn prettier-check --ignore-path .prettierignore || {
+            echo "Prettier found issues in the following files:" >&2
+            yarn prettier-check --ignore-path .prettierignore
+            exit 1
+          }
