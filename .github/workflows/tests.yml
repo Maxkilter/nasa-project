@@ -1,0 +1,31 @@
+name: Tests
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [22.x]
+        mongodb-version: ["7.0"]
+    env:
+      CI: true
+      MONGODB_URL: mongodb://localhost/nasa
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js version ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: MongoDB in GitHub Actions
+        uses: supercharge/mongodb-github-action@1.11.0
+        with:
+          mongodb-version: ${{ matrix.mongodb-version }}
+      - run: yarn install
+      - run: yarn --cwd client build
+      - name: Run Tests
+        run: yarn test

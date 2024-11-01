@@ -95,13 +95,9 @@ const existLaunchWithId = async (launchId) =>
   });
 
 const getLatestFlightNumber = async () => {
-  const { flightNumber } = await launchesDatabase
-    .findOne()
-    .sort("-flightNumber");
+  const launch = await launchesDatabase.findOne().sort("-flightNumber");
 
-  if (!flightNumber) return DEFAULT_LAUNCH_NUMBER;
-
-  return flightNumber;
+  return launch?.flightNumber || DEFAULT_LAUNCH_NUMBER;
 };
 
 const scheduleNewLaunch = async (launch) => {

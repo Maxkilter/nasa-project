@@ -2,9 +2,13 @@ const request = require("supertest");
 const app = require("../app");
 const { LAUNCHES_PATH, API_VERSION } = require("../constants");
 const { connectMongo, disconnectMongo } = require("../services/mongo");
+const { loadPlanetsData } = require("../models/planets.model");
 
 describe("Launches API", () => {
-  beforeAll(async () => await connectMongo());
+  beforeAll(async () => {
+    await connectMongo();
+    await loadPlanetsData();
+  });
   afterAll(async () => await disconnectMongo());
 
   describe("GET /launches", () => {

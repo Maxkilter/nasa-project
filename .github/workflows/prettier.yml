@@ -1,0 +1,23 @@
+name: Prettier Code Style Check
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  Lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.x"
+      - run: yarn install
+      - name: Run Prettier for Code Style Check (Server Source Only)
+        run: |
+          yarn prettier --ignore-path .prettierignore || {
+            echo "Prettier found issues in the following files:" >&2
+            yarn prettier-check --ignore-path .prettierignore
+            exit 1
+          }
