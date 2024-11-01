@@ -1,9 +1,9 @@
 name: Tests
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test:
@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         node-version: [22.x]
-        mongodb-version: ['7.0']
+        mongodb-version: ["7.0"]
     env:
       CI: true
       MONGODB_URL: mongodb://localhost/nasa

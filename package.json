@@ -12,7 +12,9 @@
     "watch": "yarn run server & yarn run client",
     "deploy": "yarn --cwd client build && yarn --cwd server start",
     "deploy-cluster": "yarn --cwd client build && yarn --cwd server cluster",
-    "test": "yarn --cwd server test && yarn --cwd client test"
+    "test": "yarn --cwd server test && yarn --cwd client test",
+    "prettier": "npx prettier . --check",
+    "prettier:fix": "npx prettier . --write"
   },
   "keywords": [],
   "author": "",
