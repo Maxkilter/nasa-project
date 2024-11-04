@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "install-server": "yarn --cwd server install",
+    "install-client": "yarn --cwd client install",
     "install": "yarn --cwd server install && yarn --cwd client install",
     "clear-server": "rm -rf server/node_modules",
     "clear-client": "rm -rf client/node_modules",
